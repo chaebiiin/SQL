@@ -1,0 +1,142 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on 목 5월 7 15:39:42 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn / as sysdba
+Connected.
+SQL> CREATE USER om IDENTIFIED BY om
+  2  DEFAULT TABLESPACE users
+  3  TEMPORARY TABLESPACE temp:
+  4  TEMPORARY TABLESPACE temp;
+TEMPORARY TABLESPACE temp:
+                         *
+ERROR at line 3:
+ORA-00922: missing or invalid option
+
+
+SQL> conn / as sysdba
+Connected.
+SQL> CREAT USER om IDENTIFIED BY om
+SP2-0734: unknown command beginning "CREAT USER..." - rest of line ignored.
+SQL> CREATE USER om IDENTIFIED BY om
+  2  DEFAULT TABLESPACE users
+  3  REMPORARY TABLESPACE temp;
+REMPORARY TABLESPACE temp
+*
+ERROR at line 3:
+ORA-00922: missing or invalid option
+
+
+SQL> connect om/om
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect hr/hr
+Connected.
+SQL> GRANT create session TO om;
+GRANT create session TO om
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn / as sysdba
+Connected.
+SQL> GRANT create session TO om;
+GRANT create session TO om
+                        *
+ERROR at line 1:
+ORA-01917: user or role 'OM' does not exist
+
+
+SQL> GRANT create session TO om;
+GRANT create session TO om
+                        *
+ERROR at line 1:
+ORA-01917: user or role 'OM' does not exist
+
+
+SQL> CREATE USER om IDENTIFIED BY om
+  2  DEFAULT TABLESPACE users
+  3  TEMPORARY TABLESPACE temp;
+
+User created.
+
+SQL> conn / as sysdba
+Connected.
+SQL> GRANT create session TO om;
+
+Grant succeeded.
+
+SQL> conn / as sysdba
+Connected.
+SQL> GRANT create table TO om;
+
+Grant succeeded.
+
+SQL> GRANT CREATE synonym TO om;
+
+Grant succeeded.
+
+SQL> GRANT CREATE public synonym TO hr;
+
+Grant succeeded.
+
+SQL> CREAT ROLE g1
+SP2-0734: unknown command beginning "CREAT ROLE..." - rest of line ignored.
+SQL> CREATE ROLE g1;
+
+Role created.
+
+SQL> GRANT CREATE VIEW, CREATE sequence TO g1;
+
+Grant succeeded.
+
+SQL> SELECT city FROM hr.locations;
+
+CITY
+------------------------------------------------------------
+Oxford
+Seattle
+South San Francisco
+Southlake
+Toronto
+
+SQL> GRANT select on hr.locations TO g1;
+
+Grant succeeded.
+
+SQL> GRANT g1 TO om;
+
+Grant succeeded.
+
+SQL> DROP ROLE g1;
+
+Role dropped.
+
+SQL> GRANT resource TO om;
+
+Grant succeeded.
+
+SQL> DROP USER om CASCADE;
+DROP USER om CASCADE
+*
+ERROR at line 1:
+ORA-01940: cannot drop a user that is currently connected
+
+
+SQL> DROP USER om CASCADE;
+
+User dropped.
+
+SQL> /
+DROP USER om CASCADE
+          *
+ERROR at line 1:
+ORA-01918: user 'OM' does not exist
+
+
+SQL>
