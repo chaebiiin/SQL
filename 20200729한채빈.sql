@@ -45,7 +45,12 @@ select * from employees where employee_id = 149;
 declare
 v_number varchar(20) :=&v_number;
 begin
-v_number:=replace(v_number, substr(v_number,7,7), '-******');
+v_number:=substr(v_number,1,6)||'-'||substr(v_number,7);
+dbms_output.put_line(v_number);
+v_number :=replace(v_number,substr(v_number,9,5), '******');
 dbms_output.put_line(v_number);
 end;
 /
+
+SELECT REGEXP_REPLACE('9006301111111', '(\d{6})(\d{1})(\d{6})', '\1-\2****** ') AS ÁÖ¹Î¹øÈ£
+FROM DUAL;
