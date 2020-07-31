@@ -467,8 +467,6 @@ DROP PROCEDURE raise_salary;
 DROP PROCEDURE process_employees;
 
 
-
-
 /*문제3. 직원의 편의를 위해 직원들이 사번, 급여 증가치만 입력하면 Employees테이블에 쉽게 사원의 급여를 갱신 할 수 있도록 프로그램을 작성하세요. 
 만약 입력한 사원이 없는 경우에는 ‘No search employee!!’라는 메시지를 출력하세요.
 */
